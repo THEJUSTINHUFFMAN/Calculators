@@ -77,7 +77,7 @@ namespace Calculators
 			while (numIn != 0)
 			{
 				numIn = int.Parse( Console.ReadLine() );
-				Console.WriteLine("{0} + {1} = {2}", total, numIn, total += numIn);
+				Console.WriteLine("{0:n0} + {1:n0} = {2:n0}", total, numIn, total += numIn);
 			}
 		}
 		
@@ -88,7 +88,7 @@ namespace Calculators
 			if (num >= 0)
 			{
 				int total = fact(num);
-				Console.WriteLine("{0}! = {1}", num, total);
+				Console.WriteLine("{0}! = {1:n0}", num, total);
 			}
 			else Console.WriteLine("Does not exist.");
 		}
@@ -125,7 +125,7 @@ namespace Calculators
 			public override string ToString()
 			{
 				string s = "";
-				s = "(" + real.ToString(s) + " + " + imag.ToString(s) + "i)" ;
+				s = "(" + real.ToString("n0") + " + " + imag.ToString("n0") + "i)" ;
 				return s;
 			}
 		}
