@@ -42,17 +42,22 @@ namespace Calculators
 							Console.WriteLine("Goodbye!");
 						break;
 						default:
+							Console.ForegroundColor = ConsoleColor.DarkGray;
 							Console.WriteLine("Invalid input, try again.");
+							Console.ResetColor();
 							break;
 					}
 				}
 				catch (System.FormatException e) //catches input from either menu selection or input in any of the calculator functions
 				{
-					Console.WriteLine("Please enter integers only.");
+					Console.WriteLine("");
+					Console.ForegroundColor = ConsoleColor.DarkGray;
+					Console.WriteLine("Please enter integers only. ({0})", e);
+					Console.ResetColor();
 				}
 			}
 			Console.WriteLine("Enter any key to exit..."); //keeps cmd on screen after program ends
-			Console.ReadLine();
+			Console.ReadKey();
 		}
 		
 		static void ContAdd() //option 1 above 
