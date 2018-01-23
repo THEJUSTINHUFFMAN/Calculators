@@ -18,30 +18,37 @@ namespace Calculators
 				Console.WriteLine("[4] --- Imaginary Product");
 				Console.WriteLine("[5] --- Exit");
 				
-				int select = int.Parse( Console.ReadLine() ); //User selects option from above menu
-				Console.WriteLine("");
-				
-				switch (select) //based off user selection
+				try //to ensure user input is an int
 				{
-					case 1:
-						ContAdd();
+					int select = int.Parse( Console.ReadLine() ); //User selects option from above menu
+					Console.WriteLine("");
+				
+					switch (select) //based off user selection
+					{
+						case 1:
+							ContAdd();
+							break;
+						case 2:
+							Factorial();
+							break;
+						case 3:
+							EZTip();
+							break;
+						case 4:
+							ImagProd();
+							break;
+						case 5:
+							cont = false;
+							Console.WriteLine("Goodbye!");
 						break;
-					case 2:
-						Factorial();
-						break;
-					case 3:
-						EZTip();
-						break;
-					case 4:
-						ImagProd();
-						break;
-					case 5:
-						cont = false;
-						Console.WriteLine("Goodbye!");
-						break;
-					default:
-						Console.WriteLine("Invalid input, try again.");
-						break;
+						default:
+							Console.WriteLine("Invalid input, try again.");
+							break;
+					}
+				}
+				catch (System.FormatException e) //catches input from either menu selection or input in any of the calculator functions
+				{
+					Console.WriteLine("Please enter integers only.");
 				}
 			}
 			Console.WriteLine("Enter any key to exit..."); //keeps cmd on screen after program ends
