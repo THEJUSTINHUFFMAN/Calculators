@@ -51,8 +51,9 @@ namespace Calculators
 				catch (System.FormatException e) //catches input from either menu selection or input in any of the calculator functions
 				{
 					Console.WriteLine("");
+					Console.Write("Please enter integers only. ");
 					Console.ForegroundColor = ConsoleColor.DarkGray;
-					Console.WriteLine("Please enter integers only. ({0})", e);
+					Console.WriteLine("({0})", e);
 					Console.ResetColor();
 				}
 			}
@@ -107,6 +108,12 @@ namespace Calculators
 		{
 			public int real;
 			public int imag;
+			public override string ToString()
+			{
+				string s = "";
+				s = "(" + real.ToString(s) + " + " + imag.ToString(s) + "i)" ;
+				return s;
+			}
 		}
 		
 		static imagNum product(imagNum n1, imagNum n2) //does math for imaginary num multiplication in ImagProd()
@@ -128,8 +135,7 @@ namespace Calculators
 			num2.imag = int.Parse( Console.ReadLine() );
 			
 			imagNum prod = product(num1,num2);
-			Console.WriteLine("({0} + {1}i) x ({2} + {3}i) = ({4} + {5}i)", num1.real, num1.imag,
-								num2.real, num2.imag, prod.real, prod.imag);
+			Console.WriteLine("{0} x {1} = {2}", num1.ToString(), num2.ToString(), prod.ToString());
 		}
 	}
 }
