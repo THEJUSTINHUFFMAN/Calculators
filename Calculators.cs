@@ -56,6 +56,14 @@ namespace Calculators
 					Console.WriteLine("({0})", e);
 					Console.ResetColor();
 				}
+				catch (System.OverflowException e)
+				{
+					Console.WriteLine("");
+					Console.Write("Sorry, can't compute numbers that large.");
+					Console.ForegroundColor = ConsoleColor.DarkGray;
+					Console.WriteLine("({0})", e);
+					Console.ResetColor();
+				}
 			}
 			Console.WriteLine("Enter any key to exit..."); //keeps cmd on screen after program ends
 			Console.ReadKey();
@@ -98,10 +106,16 @@ namespace Calculators
 			float amount = float.Parse( Console.ReadLine() );
 			Console.WriteLine("Enter tip percentage: ");
 			float percent = ( float.Parse( Console.ReadLine() ) / 100 );
+			Console.WriteLine("Enter amount of people splitting (including yourself)");
+			int split = ( int.Parse( Console.ReadLine() ) );
 			Console.WriteLine("");
 			
-			Console.WriteLine("Tip: ${0}", amount * percent);
-			Console.WriteLine("Total to be paid: ${0}" , amount *(1 + percent));
+			if (split < 1) Console.WriteLine("Split automatically set to {0} (cannot split tip by 0 or negative amount of people)", split = 1);
+			if (percent < .125f) Console.WriteLine("Please consider tipping more for great service.");
+			
+			Console.WriteLine("Tip: ${0:0.00}", amount * percent);
+			Console.WriteLine("Tip per person: ${0:0.00}", amount * percent / split);
+			Console.WriteLine("Total to be paid: ${0:0.00}" , amount *(1 + percent));
 		}
 		
 		public struct imagNum //sets up imaginary number object type for ImagProd() below
