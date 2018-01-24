@@ -39,7 +39,9 @@ namespace Calculators
 							break;
 						case 5:
 							cont = false;
+							Console.ForegroundColor = ConsoleColor.Green;
 							Console.WriteLine("Goodbye!");
+							Console.ResetColor();
 						break;
 						default:
 							Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -54,7 +56,6 @@ namespace Calculators
 					Console.Write("Please enter integers only. ");
 					Console.ForegroundColor = ConsoleColor.DarkGray;
 					Console.WriteLine("({0})", e);
-					Console.ResetColor();
 				}
 				catch (System.OverflowException e)
 				{
@@ -62,6 +63,9 @@ namespace Calculators
 					Console.Write("Sorry, can't compute numbers that large.");
 					Console.ForegroundColor = ConsoleColor.DarkGray;
 					Console.WriteLine("({0})", e);
+				}
+				finally
+				{
 					Console.ResetColor();
 				}
 			}
