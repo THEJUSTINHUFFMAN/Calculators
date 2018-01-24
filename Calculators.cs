@@ -89,17 +89,26 @@ namespace Calculators
 		{
 			Console.WriteLine("Please enter a number to be factorialized,");
 			int num = int.Parse( Console.ReadLine() );
-			if (num >= 0)
+			if (num > 12)
+			{
+				Console.ForegroundColor = ConsoleColor.DarkGray;
+				Console.WriteLine("Sorry, that number is too big. Can factorialize numbers up to 12.");
+				Console.ResetColor();
+			}
+			else if (num < 0)
+			{
+				Console.WriteLine("{0}! is undefined.", num);
+			}
+			else
 			{
 				int total = fact(num);
-				Console.WriteLine("{0}! = {1:n0}", num, total);
+				Console.WriteLine("{0}! = {1}", num, total);
 			}
-			else Console.WriteLine("Does not exist.");
 		}
 		
 		static int fact(int n) //called in Factorial() , does the math
 		{
-			if (n == 0) return 0;
+			if (n == 0) return 1;
 			if (n == 1) return 1;
 			else return n *= fact(n-1);
 		}
