@@ -38,7 +38,7 @@ namespace Calculators
 							ImagProd();
 							break;
 						case 5:
-							cont = false;
+							cont = false; //Exits
 							Console.ForegroundColor = ConsoleColor.Green;
 							Console.WriteLine("Goodbye!");
 							Console.ResetColor();
@@ -50,7 +50,7 @@ namespace Calculators
 							break;
 					}
 				}
-				catch (System.FormatException e) //catches input from either menu selection or input in any of the calculator functions
+				catch (System.FormatException e) //catches invalid input from either menu selection or input in any of the calculator functions
 				{
 					Console.WriteLine("");
 					Console.Write("Please enter integers only. ");
@@ -73,6 +73,7 @@ namespace Calculators
 			Console.ReadKey();
 		}
 		
+		
 		static void ContAdd() //option 1 above 
 		{
 			int total = 0;
@@ -81,55 +82,58 @@ namespace Calculators
 			while (numIn != 0)
 			{
 				numIn = int.Parse( Console.ReadLine() );
-				Console.WriteLine("{0:n0} + {1:n0} = {2:n0}", total, numIn, total += numIn);
+				Console.WriteLine("{0:n0} + {1:n0} = {2:n0}", total, numIn, total += numIn); //shows each step as you go
 			}
 		}
+		
 		
 		static void Factorial() //option 2 above
 		{
 			Console.WriteLine("Please enter a number to be factorialized,");
-			int num = int.Parse( Console.ReadLine() );
-			if (num > 12)
+			long num = long.Parse( Console.ReadLine() );
+			if (num > 20) //handles overflow
 			{
 				Console.ForegroundColor = ConsoleColor.DarkGray;
-				Console.WriteLine("Sorry, that number is too big. Can factorialize numbers up to 12.");
+				Console.WriteLine("Sorry, that number is too big. Can factorialize numbers up to 20.");
 				Console.ResetColor();
 			}
-			else if (num < 0)
+			else if (num < 0) //Factorials for negative numbers are not defined
 			{
 				Console.WriteLine("{0}! is undefined.", num);
 			}
 			else
 			{
-				int total = fact(num);
-				Console.WriteLine("{0}! = {1}", num, total);
+				long total = fact(num);
+				Console.WriteLine("{0}! = {1:n0}", num, total);
 			}
 		}
 		
-		static int fact(int n) //called in Factorial() , does the math
+		static long fact(long n) //called in Factorial() , does the math
 		{
 			if (n == 0) return 1;
 			if (n == 1) return 1;
-			else return n *= fact(n-1);
+			else return n *= fact(n-1); //recursive, positive inputs will always reach base case n == 1
 		}
+		
 		
 		static void EZTip() //option 3 above
 		{
 			Console.WriteLine("Enter amount billed: ");
-			float amount = float.Parse( Console.ReadLine() );
+			float amount = float.Parse( Console.ReadLine() ); //can be float because cents, error handling is not ideal on this: still asks for int
 			Console.WriteLine("Enter tip percentage: ");
-			float percent = ( float.Parse( Console.ReadLine() ) / 100 );
+			float percent = ( float.Parse( Console.ReadLine() ) / 100 ); //float incase of decimal and also math
 			Console.WriteLine("Enter amount of people splitting (including yourself)");
-			int split = ( int.Parse( Console.ReadLine() ) );
+			int split = ( int.Parse( Console.ReadLine() ) ); //int because you cant have only part of a person
 			Console.WriteLine("");
 			
-			if (split < 1) Console.WriteLine("Split automatically set to {0} (cannot split tip by 0 or negative amount of people)", split = 1);
+			if (split < 1) Console.WriteLine("Split automatically set to {0} (cannot split tip by 0 or negative amount of people)", split = 1); //these food service workers need to make a living
 			if (percent < .125f) Console.WriteLine("Please consider tipping more for great service.");
 			
 			Console.WriteLine("Tip: ${0:0.00}", amount * percent);
 			Console.WriteLine("Tip per person: ${0:0.00}", amount * percent / split);
 			Console.WriteLine("Total to be paid: ${0:0.00}" , amount *(1 + percent));
 		}
+		
 		
 		public struct imagNum //sets up imaginary number object type for ImagProd() below
 		{
